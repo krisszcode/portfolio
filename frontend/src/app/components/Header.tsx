@@ -1,14 +1,10 @@
-"use client"
-import React, { Component } from 'react';
+import React from 'react';
+import Navbar from './Navbar';
 
-class Header extends Component {
-    render() {
-        return (
-            <div>
-                feje
-            </div>
-        );
-    }
+
+
+const Header = () => {
+  return <Navbar/>;
 }
 
 export default Header;

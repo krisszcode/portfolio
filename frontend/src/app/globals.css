@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    body {
+      @apply bg-white text-gray-900 leading-normal p-0 m-0;
+    }
+
+    dark:body {
+    @apply bg-gray-900 text-white leading-normal p-0 m-0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      @apply font-semibold m-0 p-0;
+    }
+
+    p {
+      @apply m-0 p-0;
+    }
+}

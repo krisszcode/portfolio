@@ -1,14 +1,10 @@
-"use client"
-import React, { Component } from 'react';
+import React from 'react';
 
-class Footer extends Component {
-    render() {
-        return (
-            <div>
-                lába
-            </div>
-        );
-    }
+const Footer = () =>  {
+    return (
+        <div>valami
+        </div>
+    );
 }
 
 export default Footer;

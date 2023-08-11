@@ -1,5 +1,11 @@
-export default function Home() {
+import Layout from "@components/DefaultLayout";
+
+function Home() {
   return (
-    <h1>alma</h1>
-  )
+    <Layout>
+      <div>alma</div>
+    </Layout>
+  );
 }
+
+export default Home;
