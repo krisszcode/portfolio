@@ -1,28 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Logo from './Logo';
-import { LayoutModeContext, LayoutMode } from '../pages/_app';
+import { useTheme } from '../context/store';  // Importing the useTheme hook
 
 const Navbar = () => {
-    const layoutModeContext = useContext(LayoutModeContext)
-    const changeLayoutMode = () => {
-        console.log(layoutModeContext)
-        if(layoutModeContext?.layoutMode === LayoutMode.DARKMODE)
-        {
-            layoutModeContext.handleLayoutModeChange(LayoutMode.WHITEMODE);
-            localStorage.setItem('dark-mode', 'false')
-            return
-        }
-        layoutModeContext?.handleLayoutModeChange(LayoutMode.DARKMODE);
-        localStorage.setItem('dark-mode', 'true')
-    }
+    const { theme, toggleTheme } = useTheme();  // Using the context
 
     return (
         <nav>
-            <Logo darkMode={layoutModeContext?.layoutMode === LayoutMode.DARKMODE ? true : false} />
-            <button onClick = {() => changeLayoutMode()}>
-                {layoutModeContext?.layoutMode === LayoutMode.DARKMODE ? 
-                'Light Mode' : 
-                'Dark Mode'}
+            <Logo darkMode={theme === 'dark'} />
+            <button onClick={toggleTheme}>
+                {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
             </button>
             <p>Home</p>
             <p>Projects</p>

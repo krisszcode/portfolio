@@ -1,4 +1,5 @@
 import './globals.css';
+import { ThemeProvider } from './context/store'; 
 
 export const metadata = {
   title: 'Next.js',
@@ -11,8 +12,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className='bg-white text-black leading-normal p-0 m-0 dark:bg-black dark:text-white'>{children}</body>
-    </html>
+      <html className='w-full h-full p-0 m-0 overflow-hidden' lang="en">
+        <body className='w-full h-full p-0 m-0 bg-white text-black dark:bg-black dark:text-white'>
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
   )
 }
