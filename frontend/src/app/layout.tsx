@@ -1,5 +1,5 @@
 import './globals.css';
-import { ThemeProvider } from './context/store'; 
+import { Providers } from './providers'; 
 
 export const metadata = {
   title: 'Next.js',
@@ -11,12 +11,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  
+  
   return (
-      <html className='w-full h-full p-0 m-0 overflow-hidden' lang="en">
-        <body className='w-full h-full p-0 m-0 bg-white text-black dark:bg-black dark:text-white'>
-          <ThemeProvider>
-            {children}
-          </ThemeProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body>
+          <Providers>
+              {children}
+          </Providers>
         </body>
       </html>
   )
