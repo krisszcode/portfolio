@@ -6,39 +6,37 @@ import sunIcon from "public/images/sun.svg";
 import moonIcon from "public/images/moon.svg";
 
 const ThemeSwitcher = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) return null; // Prevents rendering mismatches between server and client
-  
-  const toggleTheme = () => {
-    if (theme === "dark" ) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
+    if (resolvedTheme) {
+      setHasMounted(true);
     }
+  }, [resolvedTheme]);
+
+  if (!hasMounted) return null;
+
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
+
+  const isChecked = resolvedTheme === "light"; 
 
   return (
     <label className="swap swap-rotate">
-      <input type="checkbox" onChange={toggleTheme}/>
-      {theme === "dark" ? (
+      <input type="checkbox" checked={isChecked} onChange={toggleTheme} />
+      
       <Image
-        className="w-8 h-8 fill-current"
+        className="swap-off fill-current w-7 h-7"
         src={moonIcon}
         alt="Dark"
       />
-    ) : (
       <Image
-        className="w-8 h-8 fill-current"
+        className="swap-on fill-current w-7 h-7"
         src={sunIcon}
         alt="Light"
       />
-    )}
     </label>
   );
 };
