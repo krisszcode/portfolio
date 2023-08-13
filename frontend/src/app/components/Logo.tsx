@@ -29,7 +29,7 @@ const Logo = () => {
         break
     }
 
-    return <Image src={src} className='w-10 h-10 m-5' width={40} height={40} alt='Logo'/>
+    return <Image src={src} className='w-20 h-20 m-5' width={80} height={80} alt='Logo'/>
 }
 
 export default Logo;

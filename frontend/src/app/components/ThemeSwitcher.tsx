@@ -24,16 +24,15 @@ const ThemeSwitcher = () => {
   const isChecked = resolvedTheme === "light"; 
 
   return (
-    <label className="swap swap-rotate">
+    <label className="swap swap-rotate mr-8">
       <input type="checkbox" checked={isChecked} onChange={toggleTheme} />
-      
       <Image
-        className="swap-off fill-current w-7 h-7"
+        className="swap-off fill-current w-10 h-10"
         src={moonIcon}
         alt="Dark"
       />
       <Image
-        className="swap-on fill-current w-7 h-7"
+        className="swap-on fill-current w-10 h-10"
         src={sunIcon}
         alt="Light"
       />

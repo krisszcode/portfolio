@@ -7,8 +7,12 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   darkMode: 'class',
+  
   theme: {
     extend: {
+      fontFamily: {
+        'poppins': ['Poppins', 'sans']
+      },
     },
   },
   plugins: [require('daisyui')],
