@@ -13,6 +13,13 @@ const ThemeSwitcher = () => {
     if (resolvedTheme) {
       setHasMounted(true);
     }
+
+    if (resolvedTheme === 'dark') {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
+    }
+
   }, [resolvedTheme]);
 
   if (!hasMounted) return null;

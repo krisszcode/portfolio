@@ -6,7 +6,7 @@ require('dotenv').config({ path: '../.env' });
 const app = express();
 
 // Allow cross-origin requests
-// app.use(cors());
+app.use(cors());
 
 // Connect to MongoDB
 mongoose
