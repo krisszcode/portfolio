@@ -4,32 +4,20 @@ import logoWhite from 'public/logoWhite.png';
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 
-
-
 const Logo = () => {
-
-  const [hasMounted, setHasMounted] = useState(false);
-
+  const [logo, setLogo] = useState(logoWhite)
   
     const { resolvedTheme } = useTheme()
-    let src
 
     useEffect(() => {
-      setHasMounted(true);
-    }, []);
+      if(resolvedTheme === 'light') {
+        setLogo(logoBlack)
+      } else {
+        setLogo(logoWhite)
+      }
+    }, [resolvedTheme]);
 
-    if (!hasMounted) return null;
-  
-    switch (resolvedTheme) {
-      case 'light':
-        src = logoBlack
-        break
-      case 'dark':
-        src = logoWhite
-        break
-    }
-
-    return <Image src={src} className='w-20 h-20 m-5' width={80} height={80} alt='Logo'/>
+    return <Image src={logo} className='w-20 h-20 m-5' width={80} height={80} alt='Logo'/>
 }
 
 export default Logo;

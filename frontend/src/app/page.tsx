@@ -4,7 +4,7 @@ function Home() {
   return (
     <Layout>
       <section className="min-h-screen bg-base-200">
-        <div className="p-0 flex sm:flex-row flex-col justify-center text-center align-middle items-center container mx-auto">
+        <div className="flex sm:flex-row justify-center text-center align-middle items-center container mx-auto">
           <img src="/heroImage.jpg" className="max-w-xs rounded shadow-2xl" />
           <div>
             <h1 className="text-5xl font-bold">Krisztián Nagy | Full Stack Web Developer</h1>
