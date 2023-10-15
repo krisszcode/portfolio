@@ -3,10 +3,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config({ path: '../.env' });
 
+
 const app = express();
 
 // Allow cross-origin requests
 app.use(cors());
+
+
 
 // Connect to MongoDB
 mongoose
