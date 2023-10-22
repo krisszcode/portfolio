@@ -5,12 +5,13 @@ import { useAuth } from '../context/authContext';
 export const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/login');
-    }
-  }, [isAuthenticated]);
+  if (!isAuthenticated || !token) {
+    router.push('/login');
+  }
+  }, [isAuthenticated, token]);
 
   return (
     <>
