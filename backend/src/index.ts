@@ -9,7 +9,7 @@ dotenv.config({ path: '../../.env' });
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true
 }));
@@ -18,7 +18,7 @@ app.use('/api/auth/', authRoutes);
 
 // Connect to MongoDB
 mongoose
-  .connect('mongodb+srv://krissz:VXlLSZ3g7ygVfSOH@atlascluster.xuh9kbw.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('🟢 Successfully connected to the database');
   })
@@ -29,6 +29,6 @@ mongoose
 
 // Start your express server
 app.listen(4000, () => {
-  console.log('🚀 Server ready at http://localhost:4000');
+  console.log('🚀 Server ready at ' + process.env.BACKEND_URL);
 });
 

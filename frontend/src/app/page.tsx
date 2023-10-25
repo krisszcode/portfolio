@@ -1,9 +1,7 @@
 import Layout from "@components/DefaultLayout";
-import { AuthProvider } from "./context/authContext";
 
 function Home() {
   return (
-    <AuthProvider>
       <Layout>
         <section className="min-h-screen bg-base-200">
           <div className="flex sm:flex-row justify-center text-center align-middle items-center container mx-auto">
@@ -16,7 +14,6 @@ function Home() {
           </div>
         </section>
       </Layout>
-    </AuthProvider>
   );
 }
 
