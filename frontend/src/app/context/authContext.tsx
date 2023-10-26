@@ -37,9 +37,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const register = async (username: string, password: string, email: string) => {
-    console.log('register function start');
     try {
-      const response = await axios.post('http://localhost:4000/api/auth/register', { username, password, email });
+      const response = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + 'api/auth/register', { username, password, email });
       console.log('Regisztráció sikeres', response);
     } catch (error) {
       console.error('Regisztráció sikertelen:', error);

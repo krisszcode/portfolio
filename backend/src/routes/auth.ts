@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken'
 
 const router = express.Router();
 
-router.post('/login', async (req, res) => {
+router.post('api/auth/login', async (req, res) => {
   const { username, password } = req.body;
 
   const user = await User.findOne({ username });
@@ -38,14 +38,14 @@ router.post('/register', async (req, res) => {
 
   await newUser.save();
 
-  const token = jwt.sign({ id: newUser._id }, 'kiskacsa', {
+  const token = jwt.sign({ id: newUser._id }, process.env.JWT_PRIVATE_KEY as string, {
     expiresIn: '1h',
   });
 
   res.json({ token, username });
 });
 
-router.post('/logout', authMiddleware, (req, res) => {
+router.post('api/auth/logout', authMiddleware, (req, res) => {
   res.json({ message: 'Logged out' });
 });
 

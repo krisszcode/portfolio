@@ -1,4 +1,3 @@
-import { AuthProvider } from './context/authContext';
 import './globals.css';
 import { Providers } from './providers';
 

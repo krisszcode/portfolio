@@ -4,7 +4,7 @@ const cors = require('cors');
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
 
-dotenv.config({ path: '../../.env' });
+dotenv.config({ path: '../.env' });
 
 const app = express();
 
@@ -14,7 +14,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.use('/api/auth/', authRoutes);
+app.use('/api/auth', authRoutes);
 
 // Connect to MongoDB
 mongoose
