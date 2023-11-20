@@ -1,21 +1,24 @@
-import { useEffect } from 'react';
+"use client"
+import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '../context/authContext';
+import { AuthContext } from '../context/authContext';
 
 export const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated } = useAuth();
+  const authContext = useContext(AuthContext);
   const router = useRouter();
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
-  if (!isAuthenticated || !token) {
-    router.push('/login');
-  }
-  }, [isAuthenticated, token]);
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem('token');
+      if (!authContext?.isAuthenticated || !token) {
+        router.push('/login');
+      }
+    }
+  }, [authContext?.isAuthenticated, router]);
 
   return (
     <>
-      {isAuthenticated ? children : null}
+      {authContext?.isAuthenticated ? children : null}
     </>
   );
 };

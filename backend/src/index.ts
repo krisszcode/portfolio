@@ -1,12 +1,17 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth';
+import bodyParser from 'body-parser';
+import todoRoutes from './routes/chat'
 
-dotenv.config({ path: '../.env' });
+dotenv.config({ path: '.env' });
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors({
   origin: process.env.FRONTEND_URL,
@@ -14,15 +19,17 @@ app.use(cors({
   credentials: true
 }));
 
-app.use('/api/auth', authRoutes);
+app.use('/api/auth',authRoutes);
+app.use(todoRoutes);
+
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGODB_URI as string)
   .then(() => {
     console.log('🟢 Successfully connected to the database');
   })
-  .catch((error: Error) => {
+  .catch((error) => {
     console.error('🔴 Error connecting to the database', error);
     process.exit(1);
   });
@@ -31,4 +38,3 @@ mongoose
 app.listen(4000, () => {
   console.log('🚀 Server ready at ' + process.env.BACKEND_URL);
 });
-

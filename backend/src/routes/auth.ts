@@ -2,11 +2,11 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import { authMiddleware } from '../middleware/auth';
 import { User } from '../models/User';
-import jwt from 'jsonwebtoken'
+import jwt, { JwtPayload } from 'jsonwebtoken'
 
 const router = express.Router();
 
-router.post('api/auth/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   const user = await User.findOne({ username });
@@ -15,12 +15,26 @@ router.post('api/auth/login', async (req, res) => {
   }
 
   // Generate JWT token
-  const token = jwt.sign({ userId: user._id }, 'kiskacsa');
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_PRIVATE_KEY as string);
   res.json({ token });
+});
+
+router.post('/authenticate', async (req, res) => {
+  try {
+    let { frontendToken } = req.body;
+
+    var decodedToken = jwt.verify(frontendToken, process.env.JWT_PRIVATE_KEY as string);
+    const _id = (decodedToken as JwtPayload).userId;
+    const existingUser = await User.findOne({_id});
+    res.send({ existingUser });
+  } catch (error) {
+    res.status(400).send({ message: 'Érvénytelen token!' });
+  }
 });
 
 router.post('/register', async (req, res) => {
   const { username, password, email } = req.body;
+
 
   const existingUser = await User.findOne({ username });
   if (existingUser) {
@@ -35,7 +49,7 @@ router.post('/register', async (req, res) => {
     password: hashedPassword,
     email
   });
-
+  
   await newUser.save();
 
   const token = jwt.sign({ id: newUser._id }, process.env.JWT_PRIVATE_KEY as string, {
@@ -45,7 +59,7 @@ router.post('/register', async (req, res) => {
   res.json({ token, username });
 });
 
-router.post('api/auth/logout', authMiddleware, (req, res) => {
+router.post('/logout', authMiddleware, (req, res) => {
   res.json({ message: 'Logged out' });
 });
 
