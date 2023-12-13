@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { VerifyTokenHandler } from "@components/VerifyTokenHandler";
 
 interface AuthContextProps {
@@ -12,12 +13,12 @@ interface AuthContextProps {
     email: string
   ) => Promise<void>;
   currentUser: {
-    username: string,
-    email: string
+    username: string;
+    email: string;
   } | null;
   logout: () => void;
   token: string | null;
-  verifyToken: () => Promise<void>
+  verifyToken: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextProps | null>(null);
@@ -29,41 +30,50 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setCurrentUser] = useState<{
-    username: string,
-    email: string
-  } | null>(null)
+  const [currentUser, setCurrentUser] = useState<{
+    username: string;
+    email: string;
+  } | null>(null);
+  const router = useRouter();
 
   const login = async (username: string, password: string) => {
     try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/auth/login", { username, password });
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/auth/login",
+        { username, password }
+      );
       const { token } = response.data;
       localStorage.setItem("token", token);
-      setToken(token)
+      setToken(token);
       setIsAuthenticated(true);
     } catch (error) {
       console.error("Login failed:", error);
     }
   };
 
-
   const verifyToken = async () => {
     const frontendToken = localStorage.getItem("token");
+
     if (frontendToken) {
-        const { data, status } = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + "/api/auth/authenticate", { frontendToken });
-        const username = data.username
-        const email = data.email
-        if (status === 200) {
-            setCurrentUser({username, email});
-            setToken(data.id);
-            setIsAuthenticated(true)
-            
-            return;
-        }
+      const { data, status } = await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_URL + "/api/auth/authenticate",
+        { frontendToken }
+      );
+      console.log(data,status)
+      const username = data.username;
+      const email = data.email;
+      if (status === 200) {
+        setCurrentUser({ username, email });
+        setToken(data.id);
+        setIsAuthenticated(true);
+        console.log(isAuthenticated, currentUser, token)
+        router.push('/to-do')
+        return;
+      }
     }
-};
+  };
 
   const register = async (
     username: string,
@@ -88,11 +98,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, register, user, logout, token, verifyToken,  }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        login,
+        register,
+        currentUser,
+        logout,
+        token,
+        verifyToken,
+      }}
+    >
+      {children}
       <VerifyTokenHandler/>
-        {children}
     </AuthContext.Provider>
   );
 };
-
-

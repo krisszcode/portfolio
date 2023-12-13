@@ -23,12 +23,12 @@ router.post('/authenticate', async (req, res) => {
   try {
     let { frontendToken } = req.body;
 
-    var decodedToken = jwt.verify(frontendToken, process.env.JWT_PRIVATE_KEY as string);
+    const decodedToken = jwt.verify(frontendToken, process.env.JWT_PRIVATE_KEY as string);
     const _id = (decodedToken as JwtPayload).userId;
     const existingUser = await User.findOne({_id});
     res.send({ existingUser });
   } catch (error) {
-    res.status(400).send({ message: 'Érvénytelen token!' });
+    res.status(400).send({ message: 'Invalid token!' });
   }
 });
 
