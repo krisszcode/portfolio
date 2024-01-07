@@ -4,7 +4,12 @@ const path = require('path');
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  features: {
+    // Opt-in to Webpack 5, since it's not the default yet
+    webpack5: true,
+  },
   experimental: {
+    serverComponents: true, 
   },
   webpack: (config) => {
     config.resolve.alias = {

@@ -1,13 +1,13 @@
 "use client";
 
-import Header from '@components/Header';
-import Footer from '@components/Footer';
+import Header from 'src/app/components/Header';
+import Footer from 'src/app/components/Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const DefaultLayout = ({ children }: LayoutProps) => {
 
   return (
     <>
@@ -18,4 +18,4 @@ const Layout = ({ children }: LayoutProps) => {
   );
 }
 
-export default Layout;
+export default DefaultLayout;

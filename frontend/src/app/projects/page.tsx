@@ -1,10 +1,8 @@
-import Layout from "@components/DefaultLayout";
+"use client"
 
-function Projects() {
+const Projects = () => {
   return (
-    <Layout>
-      Projects
-    </Layout>
+    <div>Projects</div>
   );
 }
 

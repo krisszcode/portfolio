@@ -1,9 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import Layout from "@components/DefaultLayout";
 import EditTask from './EditTask';
 import Task from './Task';
-import {ProtectedRoute} from '@components/ProtectedRoute';
 
 interface TaskType {
   id: number;
@@ -54,8 +52,6 @@ const Todo: React.FC = () => {
   }
 
   return (
-    <ProtectedRoute>
-      <Layout>
         <section className="min-h-screen bg-base-200 p-6">
           <input
             type="text"
@@ -92,8 +88,6 @@ const Todo: React.FC = () => {
             )
           ))}
         </section>
-      </Layout>
-    </ProtectedRoute>
   );
 }
 
