@@ -1,24 +1,14 @@
 'use client'
-import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext, useAuth } from '../context/authContext';
+import React, { useState } from 'react';
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [isSuccessful, setIsSuccessful] = useState<boolean>(false);
-  const authContext = useContext(AuthContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    try {
-      await authContext?.register(username, password, email);
-      console.log('Registration was successful');
-      setIsSuccessful(true);
-    } catch (error) {
-      console.error('Registration was unsuccessful:', error);
-      setIsSuccessful(false);
-    }
+    
   };
 
   return (

@@ -1,22 +1,13 @@
 'use client'
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../context/authContext';
-import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const authContext = useContext(AuthContext);
-  const router = useRouter()
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await authContext?.login(username, password);
-      router.push('/to-do')
-    } catch (error) {
-      console.error('Login failed:', error);
-    }
   };
 
   return (
