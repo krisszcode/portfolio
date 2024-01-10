@@ -52,7 +52,7 @@ const Todo: React.FC = () => {
   }
 
   return (
-        <section className="min-h-screen bg-base-200 p-6">
+        <div className="min-h-screen bg-base-200 p-6">
           <input
             type="text"
             value={newTaskText}
@@ -87,7 +87,7 @@ const Todo: React.FC = () => {
               />
             )
           ))}
-        </section>
+        </div>
   );
 }
 

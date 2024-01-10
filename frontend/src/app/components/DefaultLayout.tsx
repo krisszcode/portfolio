@@ -12,7 +12,7 @@ const DefaultLayout = ({ children }: LayoutProps) => {
   return (
     <>
       <Header />
-      <main>{children}</main>
+      {children}
       <Footer />
     </>
   );
