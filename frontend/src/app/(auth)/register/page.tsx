@@ -1,5 +1,5 @@
 'use client'
-const Register: React.FC = () => {
+const Register = () => {
 
   return (
       <form className="bg-white p-8 rounded-lg w-1/3 mx-auto mt-20 shadow-lg">

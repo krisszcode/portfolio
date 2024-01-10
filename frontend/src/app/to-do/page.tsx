@@ -9,7 +9,7 @@ interface TaskType {
   completed: boolean;
 }
 
-const Todo: React.FC = () => {
+const Todo = () => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
 
   const [newTaskText, setNewTaskText] = useState<string>('');

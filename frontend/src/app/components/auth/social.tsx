@@ -1,7 +1,6 @@
-import React from 'react';
 import { FaGithub, FaFacebook } from 'react-icons/fa';
 
-const SocialLogin = () => {
+const Social = () => {
     return (
         <div>
             <button>
@@ -16,4 +15,4 @@ const SocialLogin = () => {
     );
 };
 
-export default SocialLogin;
+export default Social;
