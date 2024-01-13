@@ -14,9 +14,10 @@ const nextConfig = {
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      "@components": path.resolve(__dirname, "/src/app/components"),
-      "@hooks": path.resolve(__dirname, "/src/app/hooks"),
-      "@styles": path.resolve(__dirname, "/src/app/styles"),
+      "@components": path.resolve(__dirname, "src/app/components"),
+      "@hooks": path.resolve(__dirname, "src/app/hooks"),
+      "@styles": path.resolve(__dirname, "src/app/styles"),
+      "@schemas": path.resolve(__dirname, "src/app/schemas"),
     };
     return config;
   },

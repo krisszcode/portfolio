@@ -34,7 +34,10 @@
       ],
       "@styles/*": [
         "src/app/styles/*"
-      ]
+      ],
+      "@schemas/*": [
+        "src/app/schemas/*"
+      ],
     }
   },
   "include": [
