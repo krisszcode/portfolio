@@ -1,5 +1,6 @@
 "use client";
 
+import { BackButton } from "./back-button";
 import CardHeader from "./header";
 import Social from "./social";
 
@@ -24,11 +25,11 @@ export const CardWrapper = ({
                 <CardHeader label = {headerLabel}/>
                 {children}
                 <div className="card-actions flex justify-end mt-6">
-                    <button className="btn btn-primary mr-2">{backButtonLabel}</button>
                     {showSocial && (
                         <Social/>
                     )}
                 </div>
+                <BackButton label ={backButtonLabel} href={backButtonHref}/>
             </div>
         </div>
     );
