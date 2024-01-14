@@ -7,6 +7,7 @@ import * as z from "zod";
 
 import { LoginSchema } from '@schemas/index'
 import { FormError } from "@components/form-error";
+import { FormSuccess } from "@components/form-success";
 
 export const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof LoginSchema>>({
@@ -47,6 +48,7 @@ export const LoginForm = () => {
                 />
             </div>
             <FormError message="Something went wrong" />
+            <FormSuccess message="Something went wrong"/>
             <button
                 type="submit"
                 className="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-black dark:bg-gray-700 hover:bg-indigo-700 dark:hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
