@@ -8,8 +8,24 @@ import * as z from "zod";
 import { LoginSchema } from '@schemas/index'
 import { FormError } from "@components/form-error";
 import { FormSuccess } from "@components/form-success";
+import axios from "axios";
+
+
 
 export const LoginForm = () => {
+    const LoginCall = async () => {
+        try {
+            const response = await axios.post('http://localhost:4000/login', {
+                email: 'alma@alma.com',
+                password: 'alma'
+            });
+            return response.data;
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
+
     const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
@@ -18,9 +34,12 @@ export const LoginForm = () => {
         }
     });
 
-    const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-        console.log(values)
+    const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
+        const response = await LoginCall();
+        console.log(response);
     };
+
+   
 
    return (
     <CardWrapper
