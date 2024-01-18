@@ -9,24 +9,11 @@ import { useTransition } from "react";
 import { RegisterSchema } from '@schemas/index'
 import { FormError } from "@components/form-error";
 import { FormSuccess } from "@components/form-success";
-import axios from "axios";
 
 
 
 export const RegisterForm = () => {
     const [isPending, startTransition] = useTransition();
-    const LoginCall = async () => {
-        try {
-            const response = await axios.post('http://localhost:4000/login', {
-                email: 'alma@alma.com',
-                password: 'alma'
-            });
-            return response.data;
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    
 
     const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
@@ -38,15 +25,8 @@ export const RegisterForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof RegisterSchema>) => {
-        startTransition(() => {
-            const response = LoginCall();
-            return response
-        });
-        // const response = await LoginCall();
-        
-    };
 
-   
+    };             
 
    return (
     <CardWrapper
