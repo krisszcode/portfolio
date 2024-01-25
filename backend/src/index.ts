@@ -22,7 +22,7 @@ app.use(cors({
 app.use(registerRoutes);
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI as string)
+  .connect(process.env.DATABASE_URL as string)
   .then(() => {
     console.log('🟢 Successfully connected to the database');
   })
