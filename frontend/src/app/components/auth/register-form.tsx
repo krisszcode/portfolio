@@ -4,7 +4,8 @@ import { CardWrapper } from "./card-wrapper";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
+import axios from "axios";
 
 import { RegisterSchema } from '@schemas/index'
 import { FormError } from "@components/form-error";
@@ -13,6 +14,8 @@ import { FormSuccess } from "@components/form-success";
 
 
 export const RegisterForm = () => {
+    const [error, setError] = useState<string | undefined>("")
+    const [success, setSuccess] = useState<string | undefined>("")
     const [isPending, startTransition] = useTransition();
 
     const { register, handleSubmit, formState: { errors } } = useForm<z.infer<typeof RegisterSchema>>({
@@ -25,8 +28,22 @@ export const RegisterForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof RegisterSchema>) => {
+        try {
+            const response = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/register', {
+                email: values.email,
+                password: values.password
+            });
 
-    };             
+            if (response.data.error) {
+                setError(response.data.error);
+            } else {
+                setSuccess(response.data.success);
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    };
+
 
    return (
     <CardWrapper
@@ -64,8 +81,8 @@ export const RegisterForm = () => {
                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-lg sm:text-sm border-gray-300 rounded-md px-4 py-2"
                 />
             </div>
-            <FormError message="" />
-            <FormSuccess message=""/>
+            <FormError message={error} />
+            <FormSuccess message={success}/>
             <button
                 type="submit"
                 className="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-black dark:bg-gray-700 hover:bg-indigo-700 dark:hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

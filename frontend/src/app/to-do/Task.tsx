@@ -11,7 +11,7 @@ interface TaskProps {
   onEdit: () => void;
 }
 
-const Task: React.FC<TaskProps> = ({ task, onToggle, onDelete, onEdit }) => {
+const Task = ({ task, onToggle, onDelete, onEdit } : TaskProps) => {
   return (
     <div className="flex justify-between items-center p-4 rounded-lg shadow mb-4">
       <span className={task.completed ? 'line-through text-gray-500' : ''}>{task.text}</span>

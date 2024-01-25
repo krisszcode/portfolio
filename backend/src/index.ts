@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import todoRoutes from './routes/chat'
+import registerRoutes from './routes/register'
 
 dotenv.config({ path: '.env' });
 
@@ -19,7 +19,7 @@ app.use(cors({
 }));
 
 
-app.use(todoRoutes);
+app.use(registerRoutes);
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI as string)
